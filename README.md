@@ -20,7 +20,8 @@
 
 ### call from other recipe
 
-<pre><code>include_recipe "monit_binaries"
+```
+include_recipe "monit_binaries"
 
 ----
   put config from template to /etc/monit/conf.avail/
@@ -33,25 +34,28 @@ monit_binaries "myapp.conf"
 monit_binaries "myapp.conf" do
   enable false
 end
-</code></pre>
+```
 
 
 ### monitensite monitdisite
 
-These tools contorol monit setting like a2ensite,a2disite.
+These tools control monit setting like `a2ensite`, `a2disite`.
 
-Put your confing to `/etc/monit/conf.avail/` and...
+Put your config to `/etc/monit/conf.avail/` and...
 
-** To enable setting**
+*Enable*
 
-    monitensite postfix.conf  
-    monit reload
+```
+monitensite postfix.conf  
+monit reload
+```
 
-** To disable setting**
+*Disable*
 
-    monitdisite postfix.conf
-    monit reload
-
+```
+monitdisite postfix.conf
+monit reload
+```
 
 # Attributes
 
@@ -63,57 +67,65 @@ TODO: Write attributes...
 
 Call monitensite and monit disite.
 
-**Example**
-<pre><code>monit_bin "postfix" do
+*Example*
+```
+monit_bin "postfix" do
   action :enable
-end</code></pre>
+end
+```
 
-### monti_bin_check_system
+### monit_bin_check_system
 
-build config for system resource with poricy strings.
+Build config for system resource with policy strings.
 
-**Example**
-<pre><code>monit_bin_check_system "localperf" do
+*Example*
+```
+monit_bin_check_system "localperf" do
   action :create
   policies ["if memory usage > 70 % then alert"]
-end</code></pre>
+end
+```
 
+### monit_bin_check_filesystem
 
-### monti_bin_check_filesystem
+Build config for filesystem resource with policy strings.
 
-build config for filesystem resource with poricy strings.
-
-**Example**
-<pre><code>monit_bin_check_filesystem "rootfs" do
+*Example*
+```
+monit_bin_check_filesystem "rootfs" do
   action :create
   path "/"
   policies ["if space usage > 70 % then alert"]
-end</code></pre>
+end
+```
 
-### monti_bin_check_process
+### monit_bin_check_process
 
-build config for process resource with poricy strings.
+Build config for process resource with policy strings.
 
-**Example**
-<pre><code>monit_bin_check_process "sshd" do
+*Example*
+```
+monit_bin_check_process "sshd" do
   action :create
   type "pid"
   pidfile "/var/run/sshd.pid "
   start_program "/usr/sbin/service ssh start"
   stop_program "/usr/sbin/service ssh stop"
-end</code></pre>
+end
+```
 
 
 # Recipes
 
-* default: install monit from souce.
-* include: just define monit as service resource.
+* default: install monit bins using Chef Ark.
+* source:  install monit from source.
+* include: define monit as service resource.
 * services: monitoring services. setting from attributes.
 * smartos_inittab: install and regist inittab for smartos. Smartos use this insted of default.
 
 # FAQ
 
-## monit status/summray doesn't work?
+## monit status/summary doesn't work?
 
 When using monit without `m/monit`, You should set `127.0.0.1` or `0.0.0.0` to `node[:monit][:monitrc][:'http_address]` attribute.
 
@@ -125,3 +137,4 @@ When using monit without `m/monit`, You should set `127.0.0.1` or `0.0.0.0` to `
 # Author
 
 Author:: HiganWorks LLC (<sawanoboriyu@higanworks.com>)
+Maintainer:: Myles Steinhauser (<myles.steinhauser@gmail.com>)
