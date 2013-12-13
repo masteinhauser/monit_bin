@@ -1,9 +1,9 @@
 name             "monit_bin"
-maintainer       "HiganWorks LLC"
-maintainer_email "sawanoboriyu@higanworks.com"
+maintainer       "Myles Steinhauser"
+maintainer_email "myles.steinhauser@gmail.com"
 license          "MIT"
-description      "Installs/Configures monit_bin"
+description      "Installs/Configures monit"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.0.0"
+version          "0.0.1"
 supports         "ubuntu"
 supports         "smartos"
